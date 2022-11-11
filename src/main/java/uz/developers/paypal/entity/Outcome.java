@@ -17,16 +17,16 @@ public class Outcome {
     private Integer id;
 
     @OneToOne
-    private Card fromCardId;
+    private Card fromCard;
 
     @OneToOne
-    private Card toCardId;
+    private Card toCard;
 
     private double amount;
 
     private Date date;
 
-    private double commission_amount;
+    private double commissionAmount;
 
 
 }

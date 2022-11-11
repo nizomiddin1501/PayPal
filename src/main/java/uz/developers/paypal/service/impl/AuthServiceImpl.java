@@ -2,14 +2,12 @@ package uz.developers.paypal.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.developers.paypal.entity.User;
-import uz.developers.paypal.payload.ApiResponce;
-import uz.developers.paypal.repository.UserRepository;
 import uz.developers.paypal.service.AuthService;
 
 import java.util.ArrayList;
@@ -27,32 +25,20 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 
 
     @Override
-    public List<User> getUsers() {
-        return null;
-    }
-
-    @Override
-    public User getUser(Integer id) {
-        return null;
-    }
-
-    @Override
-    public ApiResponce addUser(User user) {
-        return null;
-    }
-
-    @Override
-    public ApiResponce editUser(Integer id, User user) {
-        return null;
-    }
-
-    @Override
-    public ApiResponce deleteUser(Integer id) {
-        return null;
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        List<User> users = new ArrayList<>(
+                Arrays.asList(
+                        new User("Musobek",passwordEncoder.encode("Absd1209$"),new ArrayList<>()),
+                        new User("Doston",passwordEncoder.encode("Absd1222$"),new ArrayList<>()),
+                        new User("Fayoz",passwordEncoder.encode("Absd1221$"),new ArrayList<>()),
+                        new User("Muxi",passwordEncoder.encode("Absd1223$"),new ArrayList<>())
+
+                ));
+        for (User user : users){
+            if (user.getUsername().equals(username))
+                return user;
+        }
+        throw new UsernameNotFoundException("User topilmadi");
+
     }
 }

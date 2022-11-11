@@ -9,6 +9,7 @@ import uz.developers.paypal.payload.ApiResponce;
 import uz.developers.paypal.payload.CardDto;
 import uz.developers.paypal.service.CardService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -20,19 +21,19 @@ public class CardController {
     CardService cardService;
 
     @GetMapping
-    public ResponseEntity<List<Card>> getCards() {
-        List<Card> answers = cardService.getCards();
+    public ResponseEntity<?> getCards(HttpServletRequest request) {
+        List<Card> answers = cardService.getCards(request);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(answers);
     }
 
     @GetMapping("/{id}")
-    public Card getCard(@PathVariable Integer id) {
-        return cardService.getCard(id);
+    public Card getCard(@PathVariable Integer id,HttpServletRequest request) {
+        return cardService.getCard(id,request);
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponce> addCard(@RequestBody CardDto cardDto) {
-        ApiResponce apiResponce = cardService.addCard(cardDto);
+    public ResponseEntity<ApiResponce> addCard(@RequestBody CardDto cardDto,HttpServletRequest request) {
+        ApiResponce apiResponce = cardService.addCard(cardDto,request);
         if (apiResponce.isSuccess()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(apiResponce);
         }
@@ -41,8 +42,8 @@ public class CardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponce> editCard(@PathVariable Integer id, @RequestBody CardDto cardDto) {
-        ApiResponce apiResponce = cardService.editCard(id,cardDto);
+    public ResponseEntity<ApiResponce> editCard(@PathVariable Integer id, @RequestBody CardDto cardDto,HttpServletRequest request) {
+        ApiResponce apiResponce = cardService.editCard(id,cardDto,request);
         if (apiResponce.isSuccess()) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponce);
         }
@@ -50,8 +51,8 @@ public class CardController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCard(@PathVariable Integer id) {
-        ApiResponce apiResponce = cardService.deleteCard(id);
+    public ResponseEntity<?> deleteCard(@PathVariable Integer id,HttpServletRequest request) {
+        ApiResponce apiResponce = cardService.deleteCard(id,request);
         if (apiResponce.isSuccess()) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(apiResponce);
         }

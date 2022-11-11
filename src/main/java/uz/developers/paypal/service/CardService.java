@@ -4,16 +4,17 @@ import uz.developers.paypal.entity.Card;
 import uz.developers.paypal.payload.ApiResponce;
 import uz.developers.paypal.payload.CardDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface CardService {
-    List<Card> getCards();
+    List<Card> getCards(HttpServletRequest request);
 
-    Card getCard(Integer id);
+    Card getCard(Integer id,HttpServletRequest request);
 
-    ApiResponce addCard(CardDto cardDto);
+    ApiResponce addCard(CardDto cardDto,HttpServletRequest request);
 
-    ApiResponce editCard(Integer id, CardDto cardDto);
+    ApiResponce editCard(Integer id, CardDto cardDto,HttpServletRequest request);
 
-    ApiResponce deleteCard(Integer id);
+    ApiResponce deleteCard(Integer id,HttpServletRequest request);
 }

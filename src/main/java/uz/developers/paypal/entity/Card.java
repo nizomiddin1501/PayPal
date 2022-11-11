@@ -18,15 +18,13 @@ public class Card {
 
     private String username;
 
-    private Integer number;
+    @Column(unique = true)
+    private String cardNumber;
 
     private double balance;
 
-    @ManyToOne
-    private User user;
+    private Date expiredDate;
 
-    private Date expired_date;
-
-    private boolean active;
+    private boolean active = true;
 
 }
