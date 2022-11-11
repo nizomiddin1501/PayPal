@@ -16,8 +16,6 @@ import java.util.List;
 
 @Service
 public class AuthServiceImpl implements AuthService, UserDetailsService {
-    @Autowired
-    UserRepository userRepository;
 
     @Lazy
     @Autowired
