@@ -1,9 +1,11 @@
 package uz.developers.paypal.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,13 +14,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import uz.developers.paypal.security.JwtFilter;
+import uz.developers.paypal.service.AuthService;
+import uz.developers.paypal.service.impl.AuthServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    AuthServiceImpl authServiceImpl;
+    @Autowired
+    JwtFilter jwtFilter;
+
+
     // SUPER_ADMIN, ADMIN, USER
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(authServiceImpl);
+    }
+
 
     private final PasswordEncoder passwordEncoder;
     @Override

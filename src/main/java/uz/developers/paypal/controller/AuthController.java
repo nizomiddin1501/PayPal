@@ -6,16 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.developers.paypal.entity.User;
 import uz.developers.paypal.payload.ApiResponce;
-import uz.developers.paypal.service.UserService;
+import uz.developers.paypal.service.AuthService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class AuthController {
 
     @Autowired
-    UserService userService;
+    AuthService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {

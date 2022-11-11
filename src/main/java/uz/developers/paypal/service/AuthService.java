@@ -5,7 +5,7 @@ import uz.developers.paypal.payload.ApiResponce;
 
 import java.util.List;
 
-public interface UserService {
+public interface AuthService {
     List<User> getUsers();
 
     User getUser(Integer id);

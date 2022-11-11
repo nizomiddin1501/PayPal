@@ -5,11 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.developers.paypal.entity.Card;
-import uz.developers.paypal.entity.User;
 import uz.developers.paypal.payload.ApiResponce;
 import uz.developers.paypal.payload.CardDto;
 import uz.developers.paypal.service.CardService;
-import uz.developers.paypal.service.UserService;
 
 import java.util.List;
 
